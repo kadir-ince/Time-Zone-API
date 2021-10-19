@@ -15,5 +15,5 @@
 # vendor/
 
 # Ide
-.idea
-.vscode
+.idea/
+.vscode/
