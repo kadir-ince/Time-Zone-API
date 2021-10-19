@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
+	"time"
 )
 
 func Start() {
@@ -17,7 +18,9 @@ func Start() {
 }
 
 func getTime(writer http.ResponseWriter, request *http.Request) {
-	_, err := fmt.Fprint(writer, "the time")
+	keys, _ := request.URL.Query()["zone"] // get params in url
+	location, _ := time.LoadLocation(string(keys[0]))
+	_, err := fmt.Fprint(writer, "the time ", time.Now().In(location))
 	if err != nil {
 		return
 	}
