@@ -18,7 +18,13 @@ func Start() {
 }
 
 func getTime(writer http.ResponseWriter, request *http.Request) {
-	keys, _ := request.URL.Query()["zone"] // get params in url
+	/*
+		get param from url
+		localhost:8080/api/time?zone=Asia/Istanbul
+		request.URL.Query()["zone"] --> return the "zone=" section
+		request.URL.Query()["zone"] is return "Asia/Istanbul" in this case
+	*/
+	keys, _ := request.URL.Query()["zone"]
 	location, _ := time.LoadLocation(string(keys[0]))
 	_, err := fmt.Fprint(writer, "the time ", time.Now().In(location))
 	if err != nil {
